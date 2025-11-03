@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <list>
 #include <algorithm>
+#include <numeric>
 #include "Goat.h"
 using namespace std;
 
@@ -30,6 +31,10 @@ void color_change(list<Goat> &trip);
 //rm_duplicates() removes goats with the same name that are next to each other
 //arguments: set<Goat> trip - takes in the set of Goats
 void rm_duplicates(list<Goat> &trip);
+
+//totalAge() outputs the sum of the ages of all the goats in the list
+//arguments: set<Goat> trip - takes in the set of Goats
+void totalAge(list<Goat> &trip);
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -96,6 +101,10 @@ int main() {
 		break;
 	    case 9:
 		rm_duplicates(trip);
+		break;
+	    case 10:
+		totalAge(trip);
+		break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -118,10 +127,11 @@ int main_menu() {
     cout << "[7] Find a goat by name\n";	//std::find
     cout << "[8] Change goat color\n";		//std::replace
     cout << "[9] Remove consecutive duplicate goats\n";	//std::unique
+    cout << "[10] Total age of all goats\n";	//std::accumulate
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 9) {
+    while (choice < 1 || choice > 10) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -215,4 +225,7 @@ void rm_duplicates(list<Goat> &trip){
     trip.unique([](const Goat &a, const Goat &b) { return a.get_name() == b.get_name(); });
 }
 
-
+void totalAge(list<Goat> &trip){
+    int sum = accumulate(trip.begin(), trip.end(), 0, [](int total, const Goat &g) { return total + g.get_age(); });
+    cout << "Total age of all goats: " << sum << " years\n";
+}
