@@ -15,9 +15,9 @@ const int SZ_NAMES = 200, SZ_COLORS = 25;
 //arguments: set<Goat> trip - takes in the set of Goats
 void cheer(list<Goat> &trip);
 
-//shuffle() mixes up the order of the goats in the trip
+//reverse() reverses the order of the goats in the trip
 //arguments: set<Goat> trip - takes in the set of Goats
-void shuffle(list<Goat> &trip);
+void reverse(list<Goat> &trip);
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -74,7 +74,7 @@ int main() {
 		cheer(trip);
 		break;
 	    case 6:
-		shuffle(trip);
+		reverse(trip);
 		break;
             default:
                 cout << "Invalid selection.\n";
@@ -94,7 +94,7 @@ int main_menu() {
     cout << "[3] List goats\n";
     cout << "[4] Quit\n";
     cout << "[5] All goats cheer\n";	//trying std::for_each
-    cout << "[6] Shuffle goats\n";    //trying std::shuffle
+    cout << "[6] Reverse goats order\n";    //trying std::reverse
     cout << "Choice --> ";
     int choice;
     cin >> choice;
@@ -155,7 +155,6 @@ void cheer(list<Goat> &trip){
     cout << endl;
 }
 
-void shuffle(list<Goat> &trip){
-    shuffle(trip.begin(), trip.end(),
-    default_random_engine());
+void reverse(list<Goat> &trip){
+   reverse(trip.begin(), trip.end());
 }
