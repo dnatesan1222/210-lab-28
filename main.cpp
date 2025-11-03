@@ -40,6 +40,10 @@ void totalAge(list<Goat> &trip);
 //arguments: set<Goat> trip - takes in the set of Goats
 void decade(list<Goat> &trip);
 
+//oneYear() ages all the goats by one year
+//arguments: set<Goat> trip - takes in the set of Goats
+void oneYear(list<Goat> &trip);
+
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -112,6 +116,9 @@ int main() {
             case 11:
                 decade(trip);
                 break;
+	    case 12:
+		oneYear(trip);
+		break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -136,10 +143,11 @@ int main_menu() {
     cout << "[9] Remove consecutive duplicate goats\n";	//std::unique
     cout << "[10] Total age of all goats\n";	//std::accumulate
     cout << "[11] Check if any goats are over 10 years old\n";	//std::any_of
+    cout << "[12] One year passes\n";		//std::transform
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 11) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -246,4 +254,9 @@ void decade(list<Goat> &trip){
     else
         cout << "No goat is over a decade old.\n";
 
+}
+
+void oneYear(list<Goat> &trip){
+    transform(trip.begin(), trip.end(), trip.begin(), [](Goat &g) { g.set_age(g.get_age() + 1); return g; });
+    cout << "All goats have aged one year\n";
 }
