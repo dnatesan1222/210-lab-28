@@ -27,6 +27,10 @@ void find(list<Goat> &trip);
 //arguments: set<Goat> trip - takes in the set of Goats
 void color_change(list<Goat> &trip);
 
+//rm_duplicates() removes goats with the same name that are next to each other
+//arguments: set<Goat> trip - takes in the set of Goats
+void rm_duplicates(list<Goat> &trip);
+
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -90,6 +94,8 @@ int main() {
 	    case 8:
 		color_change(trip);
 		break;
+	    case 9:
+		rm_duplicates(trip);
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -111,10 +117,11 @@ int main_menu() {
     cout << "[6] Reverse goats order\n";    	//trying std::reverse
     cout << "[7] Find a goat by name\n";	//std::find
     cout << "[8] Change goat color\n";		//std::replace
+    cout << "[9] Remove consecutive duplicate goats\n";	//std::unique
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -203,5 +210,9 @@ void color_change(list<Goat> &trip){
     cout << "Colors updated!\n";
 }
 
+void rm_duplicates(list<Goat> &trip){
+    cout << "Removing all consecutive duplicate goats (based on name)\n";
+    trip.unique([](const Goat &a, const Goat &b) { return a.get_name() == b.get_name(); });
+}
 
 
