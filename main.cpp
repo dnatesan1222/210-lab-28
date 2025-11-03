@@ -21,7 +21,7 @@ void reverse(list<Goat> &trip);
 
 //find() finds a goat based on the name given by the user
 //arguments: set<Goat> trip - takes in the set of Goats
-void find(list<Goat> &trip)
+void find(list<Goat> &trip);
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -171,7 +171,7 @@ void find(list<Goat> &trip){
     cout << "Enter the name of the goat you want to find: ";
     string name;
     cin >> name;
-    auto it = find_if(trip.begin(), trip.end(), [&name](Goat &g);
+    auto it = find_if(trip.begin(), trip.end(), [&name](Goat &g) { return g.get_name() == name;});
     if (it != trip.end()){
         cout << "Goat found:\n";
         cout << it->get_name() << " (" 
