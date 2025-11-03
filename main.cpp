@@ -5,10 +5,15 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <algorithm>
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25;
+
+//cheer() displays a message from each goat to the user
+////arguments: set<Goat> trip - takes in the set of Goats
+void cheer(list<Goat> &trip);
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -61,6 +66,9 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
+	    case 5:
+		cheer(trip);
+		break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -78,10 +86,11 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Quit\n";
+    cout << "[5] All goats cheer\n";	//trying std::for_each
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 5) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -129,3 +138,12 @@ int select_goat(list<Goat> trp) {
     }
     return input;
 }
+
+void cheer(list<Goat> trip){
+    cout << "All goats cheer!\n";
+    for_each(trip.begin(), trip.end(), [](Goat &g) {
+        cout << g.get_name() << " (" << g.get_color() << ") says: Baaah of joy!\n";
+    });
+    cout << endl;
+}
+
