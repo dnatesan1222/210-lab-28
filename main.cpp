@@ -139,7 +139,7 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
-void cheer(list<Goat> trip){
+void cheer(list<Goat> &trip){
     cout << "All goats cheer!\n";
     for_each(trip.begin(), trip.end(), [](Goat &g) {
         cout << g.get_name() << " (" << g.get_color() << ") says: Baaah of joy!\n";
