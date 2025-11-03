@@ -19,6 +19,10 @@ void cheer(list<Goat> &trip);
 //arguments: set<Goat> trip - takes in the set of Goats
 void reverse(list<Goat> &trip);
 
+//find() finds a goat based on the name given by the user
+//arguments: set<Goat> trip - takes in the set of Goats
+void find(list<Goat> &trip)
+
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -76,6 +80,9 @@ int main() {
 	    case 6:
 		reverse(trip);
 		break;
+	    case 7:
+		find(trip);
+		break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -95,10 +102,11 @@ int main_menu() {
     cout << "[4] Quit\n";
     cout << "[5] All goats cheer\n";	//trying std::for_each
     cout << "[6] Reverse goats order\n";    //trying std::reverse
+    cout << "[7] Find a goat by name\n";	//std::find
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -156,5 +164,25 @@ void cheer(list<Goat> &trip){
 }
 
 void reverse(list<Goat> &trip){
-   reverse(trip.begin(), trip.end());
+    reverse(trip.begin(), trip.end());
 }
+
+void find(list<Goat> &trip){
+    cout << "Enter the name of the goat you want to find: ";
+    string name;
+    cin >> name;
+    auto it = find_if(trip.begin(), trip.end(), [&name](Goat &g);
+    if (it != trip.end()){
+        cout << "Goat found:\n";
+        cout << it->get_name() << " (" 
+             << it->get_age() << ", " 
+             << it->get_color() << ")\n";
+    } else
+        cout << "No goat with the name " << name << " found.\n";
+
+
+}
+
+
+
+
