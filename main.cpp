@@ -23,6 +23,10 @@ void reverse(list<Goat> &trip);
 //arguments: set<Goat> trip - takes in the set of Goats
 void find(list<Goat> &trip);
 
+//color_change() changes the the color of all goat with a ceratin color
+//arguments: set<Goat> trip - takes in the set of Goats
+void color_change(list<Goat> &trip);
+
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -83,6 +87,9 @@ int main() {
 	    case 7:
 		find(trip);
 		break;
+	    case 8:
+		color_change(trip);
+		break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -100,13 +107,14 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Quit\n";
-    cout << "[5] All goats cheer\n";	//trying std::for_each
-    cout << "[6] Reverse goats order\n";    //trying std::reverse
+    cout << "[5] All goats cheer\n";		//trying std::for_each
+    cout << "[6] Reverse goats order\n";    	//trying std::reverse
     cout << "[7] Find a goat by name\n";	//std::find
+    cout << "[8] Change goat color\n";		//std::replace
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -183,6 +191,17 @@ void find(list<Goat> &trip){
 
 }
 
+void color_change(list<Goat> &trip){
+    cout << "Color to replace: ";
+    string origColor;
+    cin >> origColor;
+    cout << "New color for replacement: ";
+    string newColor;
+    cin >> newColor;
+
+    replace_if(trip.begin(), trip.end(), [&origColor](Goat &g) { return g.get_color() == origColor; }, Goat("", 0, newColor) );
+    cout << "Colors updated!\n";
+}
 
 
 
