@@ -36,6 +36,10 @@ void rm_duplicates(list<Goat> &trip);
 //arguments: set<Goat> trip - takes in the set of Goats
 void totalAge(list<Goat> &trip);
 
+//decade() displays message on whether any goats are over age 10
+//arguments: set<Goat> trip - takes in the set of Goats
+void decade(list<Goat> &trip);
+
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -105,6 +109,9 @@ int main() {
 	    case 10:
 		totalAge(trip);
 		break;
+            case 11:
+                decade(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -128,10 +135,11 @@ int main_menu() {
     cout << "[8] Change goat color\n";		//std::replace
     cout << "[9] Remove consecutive duplicate goats\n";	//std::unique
     cout << "[10] Total age of all goats\n";	//std::accumulate
+    cout << "[11] Check if any goats are over 10 years old\n";	//std::any_of
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 10) {
+    while (choice < 1 || choice > 11) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -228,4 +236,14 @@ void rm_duplicates(list<Goat> &trip){
 void totalAge(list<Goat> &trip){
     int sum = accumulate(trip.begin(), trip.end(), 0, [](int total, const Goat &g) { return total + g.get_age(); });
     cout << "Total age of all goats: " << sum << " years\n";
+}
+
+void decade(list<Goat> &trip){
+    int age = 10;
+    bool exists = any_of(trip.begin(), trip.end(), [age](const Goat &g) { return g.get_age() > age; });
+    if (exists)
+	cout << "At least one goat is over a decade old.\n";
+    else
+        cout << "No goat is over a decade old.\n";
+
 }
